@@ -103,4 +103,4 @@
 <div align=center><font color="#743F30" face="Narkisim" class="ws36"><B>Napravi svoju tortu!</B></font></div>
 </div></div>
 
-<form action="Porucivanje.html"><input name="Poruci" type="submit" value="Poruci!" style="position:absolute;left:506px;top:898px;z-index:40"></form>
+<form action="<?php echo site_url("torte/poruci/new"); ?>" method="POST"><input name="submit" type="submit" value="Poruci!" style="position:absolute;left:506px;top:898px;z-index:40"></form>

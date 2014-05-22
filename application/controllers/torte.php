@@ -56,4 +56,18 @@ class Torte extends CI_Controller {
 		
 		$this->smit->stranica('sesir_torta');
 	}
+	
+	public function napravi() {
+		$this->smit->stranica('napravi_tortu');
+	}
+	
+	public function poruci($id) {
+		if (empty($id))
+			redirect('galerija');
+		/*if ($id == 'new')
+			... */
+		//if (intval($id) <= 0) ...umesto ovoga ce biti provera u bazi
+		
+		$this->smit->stranica('porucivanje');
+	}
 }
