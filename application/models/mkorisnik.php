@@ -40,7 +40,7 @@ class Mkorisnik extends CI_Model {
 	function unosNovog($tip, $kor_ime, $sifra, $email, $dodatak) {
 		$korisnik = array(
 			'KorIme' => $kor_ime,
-			'Sifra'  => $sifra,
+			'Sifra'  => md5($sifra),
 			'Email'  => $email
 			// 'Telefon' => null
 		);
@@ -80,7 +80,7 @@ class Mkorisnik extends CI_Model {
 	
 	function novaFirma($kor_ime, $sifra, $email, $naziv, $lokacija, $delatnost) {
 		
-		return unosNovog(2, $kor_ime, $sifra, $email, array(
+		return $this->unosNovog(2, $kor_ime, $sifra, $email, array(
 			'Naziv'     => $naziv,
 			'Lokacija'  => $lokacija,
 			'Delatnost' => $delatnost
@@ -89,7 +89,7 @@ class Mkorisnik extends CI_Model {
 	
 	function novoFizLice($kor_ime, $sifra, $email, $ime, $prezime) {
 		
-		return unosNovog(1, $kor_ime, $sifra, $email, array(
+		return $this->unosNovog(1, $kor_ime, $sifra, $email, array(
 			'Ime'     => $ime,
 			'Prezime' => $prezime
 		));

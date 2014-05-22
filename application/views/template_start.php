@@ -105,16 +105,43 @@ DIV,UL,OL /* Left */
 <div align=center><font color="#743F30" face="Narkisim" class="ws22"><B>tortica@outlook.com</B></font></div>
 </div></div>
 
-<div id="g_text1" style="position:absolute; overflow:hidden; left:908px; top:14px; width:197px; height:31px; z-index:17">
-<a href="<?php echo site_url("korisnik/registracija"); ?>"><div class="wpmd">
-<div align=center><font color="#743F30" face="Narkisim" class="ws22"><B>Registruj se</B></font></div>
-</div></a></div>
+<div id="g_text1" style="position:absolute; overflow:hidden; left:829px; top:14px; width:339px; height:31px; z-index:17">
+<?php
+	if ($this->mkorisnik->ulogovan) {
+		if ($this->mkorisnik->firma)
+			$korisnik = $_SESSION['nazivfirme'];
+		else
+			$korisnik = $_SESSION['imeprezime'];
+		
+		echo '<div class="wpmd">';
+		echo '<div align=center><font color="#743F30" face="Narkisim" class="ws22"><B>'
+			. $korisnik . '</B></font></div>';                     // class="ws16"
+		echo '</div>';
+		
+	} else {
+		echo '<a href="' . site_url("korisnik/registracija") . '"><div class="wpmd">';
+		echo '<div align=center><font color="#743F30" face="Narkisim" class="ws22">'
+			.'<B>Registruj se</B></font></div>';
+		echo '</div></a>';
+	}
+?>
+</div>
 
 <div id="g_image1" style="position:absolute; overflow:hidden; left:859px; top:45px; width:279px; height:39px; z-index:18"><img src="/images/linija.png" alt="" title="" border=0 width=279 height=39></div>
 
-<div id="g_text2" style="position:absolute; overflow:hidden; left:906px; top:86px; width:197px; height:31px; z-index:19">
-<a href="<?php echo site_url("korisnik/login"); ?>"><div class="wpmd">
-<div align=center><font color="#743F30" face="Narkisim" class="ws22"><B>Uloguj se</B></font></div>
+<div id="g_text2" style="position:absolute; overflow:hidden; left:829px; top:86px; width:339px; height:31px; z-index:19">
+<a href="<?php 
+	if ($this->mkorisnik->ulogovan)
+		echo site_url("korisnik/logout");
+	else
+		echo site_url("korisnik/login");
+?>"><div class="wpmd">
+<div align=center><font color="#743F30" face="Narkisim" class="ws22"><B><?php
+	if ($this->mkorisnik->ulogovan)
+		echo "Izloguj se";
+	else
+		echo "Uloguj se";
+?></B></font></div>
 </div></a></div>
 
 <div id="g_text11" style="position:absolute; overflow:hidden; left:88px; top:1404px; width:386px; height:64px; z-index:20">

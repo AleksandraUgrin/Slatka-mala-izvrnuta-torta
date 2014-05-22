@@ -1,12 +1,18 @@
+<script type="text/javascript" src="/js/ajax.js"></script>
+<script type="text/javascript" src="/js/reg.js"></script>
+
 <div id="image3" style="position:absolute; overflow:hidden; left:97px; top:428px; width:103px; height:98px; z-index:21"><img src="/images/srce.png" alt="" title="" border=0 width=103 height=98></div>
 
-<input name="formtext1" type="text" style="position:absolute;width:367px;left:476px;top:572px;z-index:22">
-<input name="formtext2" type="text" style="position:absolute;width:367px;left:476px;top:621px;z-index:23">
-<input name="formtext3" type="text" style="position:absolute;width:367px;left:476px;top:672px;z-index:24">
-<input name="formtext4" type="text" style="position:absolute;width:367px;left:475px;top:723px;z-index:25">
-<input name="formtext5" type="text" style="position:absolute;width:367px;left:475px;top:776px;z-index:26">
-<input name="formtext6" type="text" style="position:absolute;width:367px;left:475px;top:827px;z-index:27">
-<input name="formbutton1" type="submit" value="Potvrdi" onClick='alert("Uspesno ste registrovani na sajt!"); window.location = "Pocetna.html"' style="position:absolute;left:507px;top:902px;z-index:27">
+<form name="forma" method="POST" action="reg_fizickolice">
+<input name="ime" type="text" style="position:absolute;width:367px;left:476px;top:572px;z-index:22">
+<input name="prezime" type="text" style="position:absolute;width:367px;left:476px;top:621px;z-index:23">
+<input name="korisnickoime" type="text" style="position:absolute;width:367px;left:476px;top:672px;z-index:24">
+<input name="sifra" type="password" style="position:absolute;width:367px;left:475px;top:723px;z-index:25">
+<input name="sifra2" type="password" style="position:absolute;width:367px;left:475px;top:776px;z-index:26">
+<input name="email" type="text" style="position:absolute;width:367px;left:475px;top:827px;z-index:27">
+<input name="submit" type="submit" value="Potvrdi" onClick='registracija_fizLice("forma"); return false' style="position:absolute;left:507px;top:902px;z-index:27">
+</form>
+
 <div id="text1" style="position:absolute; overflow:hidden; left:389px; top:446px; width:351px; height:54px; z-index:29">
 <div class="wpmd">
 <div align=center><font color="#743F30" face="Narkisim" class="ws36"><B>Unesi podatke:</B></font></div>

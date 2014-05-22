@@ -51,7 +51,7 @@ class Torte extends CI_Controller {
 	{
 		if (empty($id))
 			redirect('galerija');
-		if (intval($id) == 0)
+		if (intval($id) <= 0)
 			redirect('galerija');
 		
 		$this->smit->stranica('sesir_torta');
