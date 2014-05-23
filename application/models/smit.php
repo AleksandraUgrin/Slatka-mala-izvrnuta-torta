@@ -12,9 +12,5 @@ class SMIT extends CI_Model {
 		$this->load->view("stranice/$st");
 		$this->load->view('template_end');
 	}
-	
-	function printme() {
-		var_dump($this);
-	}
     
 }

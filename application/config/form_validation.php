@@ -71,5 +71,33 @@ $config = array(
 			'label' => 'Prezime',
 			'rules' => 'required'
 		)
+	),
+	
+	'napravi_tortu' => array(
+		array(
+			'field' => 'voce',
+			'label' => 'Voce',
+			'rules' => 'required|is_natural|less_than[17]|intval' // SELECT polje koje koristi samo brojeve
+		),
+		array(
+			'field' => 'kostunjavo',
+			'label' => 'Kostunjavo voce',
+			'rules' => 'required|is_natural|less_than[7]|intval'
+		),
+		array(
+			'field' => 'krem',
+			'label' => 'Kremovi',
+			'rules' => 'required|is_natural|less_than[9]|intval' // SELECT
+		),
+		array(
+			'field' => 'keks',
+			'label' => 'Keks',
+			'rules' => 'required|is_natural|less_than[8]|intval' // SELECT
+		),
+		array(
+			'field' => 'tezina',
+			'label' => 'Tezina',
+			'rules' => 'required|is_natural|intval' // tezina je ceo broj u gramima
+		)
 	)
 );

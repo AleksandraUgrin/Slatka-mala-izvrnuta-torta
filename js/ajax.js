@@ -1,3 +1,4 @@
+// Ne radi za Checkbox i radio button! (kod njih mora Checked)
 function unesiFormu(forma, polja, submit) {
 	var str = "";
 	for (var p in polja) {
