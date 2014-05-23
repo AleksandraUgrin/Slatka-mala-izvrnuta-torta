@@ -70,11 +70,14 @@ if (!function_exists('cena_torte')) {
 }
 
 if (!function_exists('ispravan_datum')) {
-	function ispravan_datum($str) {
+	function ispravan_datum($str) {	
 		// $this->form_validation->set_message('ispravan_datum', '...');
 		// date_timestamp_get(date_create($str))
-		$d = date_parse($str);
+		$d = date_parse_from_format("j.n.Y", $str);
+		// date_parse ume da zeza: npr "24.5." se parsira kao 24:5:0 i nedefinisan datum
+		// zato smo rucno zadali format datuma
 		
+		// TODO iz nekog razloga $d['bilosta'] nece da radi!
 		if (($d['warning_count'] > 0) || ($d['error_count'] > 0))
 			return FALSE;
 		
