@@ -19,11 +19,12 @@ $lang['regex_match']		= "%s nije u ispravnom formatu";
 $lang['matches']			= "%s i %s se ne slazu";
 $lang['is_unique'] 			= "%s mora da bude jedinstveno";
 $lang['is_natural']			= "%s mora da bude pozitivan ceo broj";
-//$lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
+$lang['is_natural_no_zero']	= "%s mora da bude pozitivan ceo broj";
 $lang['decimal']			= "%s mora da bude decimalni broj (koristiti '.' kao zarez)";
 $lang['less_than']			= "%s mora da bude broj manji od %s";
 $lang['greater_than']		= "%s mora da bude broj veci od %s";
 
+$lang['ispravan_datum']     = "%s nije u ispravnom formatu datuma (dd.mm.gggg)";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */

@@ -68,3 +68,20 @@ if (!function_exists('cena_torte')) {
 		return $cena;
 	}
 }
+
+if (!function_exists('ispravan_datum')) {
+	function ispravan_datum($str) {
+		// $this->form_validation->set_message('ispravan_datum', '...');
+		// date_timestamp_get(date_create($str))
+		$d = date_parse($str);
+		
+		if (($d['warning_count'] > 0) || ($d['error_count'] > 0))
+			return FALSE;
+		
+		if ($d['is_localtime'])
+			$timestamp = mktime(0, 0, 0, $d['month'], $d['day'], $d['year']);
+		else
+			$timestamp = gmmktime(0, 0, 0, $d['month'], $d['day'], $d['year']);
+		return $timestamp; // return TRUE;
+	}
+}

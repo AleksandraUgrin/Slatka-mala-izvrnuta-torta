@@ -97,13 +97,40 @@ class Torte extends CI_Controller {
 		$this->smit->stranica('napravi_tortu');
 	}
 	
-	public function poruci($id) {
-		if (empty($id))
-			redirect('galerija');
-		/*if ($id == 'new')
-			... */
-		//if (intval($id) <= 0) ...umesto ovoga ce biti provera u bazi
+	public function poruci($id = 0) {
+		/*if (empty($id))
+			redirect('galerija');*/
+		//if (intval($id) <= 0) ...umesto ovoga ide provera u bazi
 		
-		$this->smit->stranica('porucivanje');
+		if (isset($_POST['submit'])) {
+			if ($this->mkorisnik->ulogovan)
+				$nalog = intval($_SESSION['idreg']);
+			else
+				$nalog = 0;
+			
+			smit_priprema_forme();
+			$greska = "";
+			
+			if ($this->form_validation->run('porucivanje') == false) {
+				die(validation_errors());
+			}
+			
+			$pid = $this->torta->porudzbina(
+				set_value('idtorta'), $nalog, set_value('ime'), set_value('adresa'),
+				set_value('datum'), set_value('kolicina'), set_value('nacinplacanja'));
+			if ($pid > 0)
+				die("OK $pid");
+		}
+		
+		$query = $this->db->get_where('torta', array('IDTorta' => intval($id)), 1);
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			$conf = array(
+				'idtorta' => intval($id), // IDTorta
+				'cena' => $row->Cena
+			);
+			$this->smit->stranica('porucivanje', $conf);
+		} else
+			redirect('galerija');
 	}
 }

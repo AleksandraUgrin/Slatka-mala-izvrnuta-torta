@@ -7,9 +7,9 @@ class SMIT extends CI_Model {
         parent::__construct();
     }
 	
-	function stranica($st) {
-		$this->load->view('template_start');
-		$this->load->view("stranice/$st");
+	function stranica($st, $conf = array()) {
+		$this->load->view('template_start', $conf);
+		$this->load->view("stranice/$st", $conf);
 		$this->load->view('template_end');
 	}
     

@@ -8,61 +8,87 @@ class MTorta extends CI_Model {
 		//session_start();
     }*/
 	
-	function unosNovog($tip, $kor_ime, $sifra, $email, $dodatak) {
-		$korisnik = array(
-			'KorIme' => $kor_ime,
-			'Sifra'  => md5($sifra),
-			'Email'  => $email
-			// 'Telefon' => null
+	function unosNove($narucena, $naz = '', $c, $v, $kv, $kr, $sl, $k, $obl, $tez, $kat = array()) {
+		$torta = array(
+		  'Naziv' => $naz,
+		  'Cena' => $c,
+		  'Tezina' => $tez,
+		  'Voce' => $v,
+		  'KostVoce' => $kv,
+		  'Kremovi' => $kr,
+		  'Slagovi' => $sl,
+		  'KeksKore' => $k,
+		  'PosebanOblik' => $obl
 		);
+		if ($narucena)
+			$torta['Narucena'] = 1;
 		
-		if ($tip == 1) {
-			// Fizicko lice
-			/*$fizlice = array(
-				'Ime'     => $dodatak['ime'],
-				'Prezime' => $dodatak['prezime']
-			);*/
-			$fizlice = $dodatak;
-		}
-		else if ($tip == 2) {
-			// Firma
-			$firma = $dodatak;
-		}
-		else // Greska
-			return false;
-		
+		$ins_id = -1;
 		try {
-			$this->db->insert('regkorisnik', $korisnik);
+			$this->db->insert('torta', $torta);
 			$ins_id = $this->db->insert_id();
-			if (isset($fizlice)) {
-				$fizlice['IDReg'] = $ins_id;
-				$this->db->insert('fizlice', $fizlice);
-			}
-			else { // firma
-				$firma['IDReg'] = $ins_id;
-				$this->db->insert('firma', $firma);
-			}
-			return $ins_id;
-			
 		} catch (Exception $e) {
 			die("GRESKA SA BAZOM :( <br />" . $this->db->_error_message);
 		}
+		
+		if ($narucena)
+			return $ins_id;
+		
+		$kats = array();
+		foreach ($kat as $v) {
+			$kats[] = array(
+				'IDTorta' => $ins_id,
+				'Kategorija' => $v
+			);
+		}
+		try {
+			$this->db->insert_batch('kategorijatorte', $kats);
+		} catch (Exception $e) {
+			die("GRESKA SA BAZOM :( <br />" . $this->db->_error_message);
+		}
+		
+		return $ins_id;
 	}
 	
-	function novaFirma($kor_ime, $sifra, $email, $naziv, $lokacija, $delatnost) {
-		
-		return $this->unosNovog(2, $kor_ime, $sifra, $email, array(
-			'Naziv'     => $naziv,
-			'Lokacija'  => $lokacija,
-			'Delatnost' => $delatnost
-		));
+	function novaPoNarudzbini($v, $kv, $kr, $sl, $k, $obl, $tez) {
+		$c = cena_torte($v, $kv, $kr, $k, $sl, $tez);
+		return $this->unosNove(true, '', $c, $v, $kv, $kr, $sl, $k, $obl, $tez);
 	}
 	
-	function novoFizLice($kor_ime, $sifra, $email, $ime, $prezime) {
+	function novaTorta() {
+		// TODO!
+	}
+	
+	function porudzbina($id, $login = 0, $ime, $adr, $dat, $kol, $np) {
+		$query = $this->db->get_where('torta', array('IDTorta' => $id), 1);
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			$cenatorte = $row->Cena;
+		}
+		else
+			die("Ne postoji trazena torta!");
 		
-		return $this->unosNovog(1, $kor_ime, $sifra, $email, array(
-			'Ime'     => $ime,
-			'Prezime' => $prezime
-		));
+		$por = array(
+			'IDTorta' => $id,
+			'Ime' => $ime,
+			'AdresaIsporuke' => $adr,
+			//'DatumIsporuke' => $dat,
+			'Kolicina' => $kol,
+			'NacinPlacanja' => $np,
+			'Cena' => $cenatorte * $kol
+		);
+		if ($login > 0)
+			$por['IDReg'] = $login;
+		$this->db->set('DatumIsporuke', "FROM_UNIXTIME($dat)", FALSE);
+		
+		$ins_id = -1;
+		try {
+			$this->db->insert('porudzbina', $por);
+			$ins_id = $this->db->insert_id();
+		} catch (Exception $e) {
+			die("GRESKA SA BAZOM :( <br />" . $this->db->_error_message);
+		}
+		
+		return $ins_id;
 	}
 }

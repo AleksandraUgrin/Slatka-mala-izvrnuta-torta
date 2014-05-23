@@ -99,5 +99,38 @@ $config = array(
 			'label' => 'Tezina',
 			'rules' => 'required|is_natural|intval' // tezina je ceo broj u gramima
 		)
+	),
+	
+	'porucivanje' => array (
+		array(
+			'field' => 'idtorta', // da li ovo da proveravamo posebno?
+			'label' => 'Torta',
+			'rules' => 'required|is_natural|intval'
+		),
+		array(
+			'field' => 'ime',
+			'label' => 'Ime',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'adresa',
+			'label' => 'Adresa isporuke',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'nacinplacanja',
+			'label' => 'Nacin placanja',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'kolicina',
+			'label' => 'Kolicina',
+			'rules' => 'required|is_natural_no_zero|intval'
+		),
+		array(
+			'field' => 'datum',
+			'label' => 'Datum isporuke',
+			'rules' => 'required|ispravan_datum|intval' // mozda 'intval' nije potreban
+		)
 	)
 );

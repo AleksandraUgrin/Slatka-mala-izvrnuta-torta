@@ -24,6 +24,11 @@ class Baza extends CI_Controller {
 			$keks = intval($_REQUEST['keks']);
 			$obl = $_REQUEST['oblik'];
 			
+			// TODO: Moderator deo - koristiti model "torta": torta->novaTorta(parametri)
+			// Pogledati: application/models/mtorta.php i nacin koriscenja f-ja
+			
+			// ODAVDE se brise (i menja sa novim nacinom unosa)
+			
 			$torta = array(
 			  'Naziv' => $naz,
 			  'Cena' => $cena,
@@ -56,6 +61,8 @@ class Baza extends CI_Controller {
 			} catch (Exception $e) {
 				die("GRESKA SA BAZOM :( <br />" . $this->db->_error_message);
 			}
+			
+			// DO OVDE se brise...
 			
 			echo "<p>Uneta je torta sa ID = $ins_id</p>";
 		}
