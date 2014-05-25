@@ -132,5 +132,23 @@ $config = array(
 			'label' => 'Datum isporuke',
 			'rules' => 'required|callback_ispravan_datum|intval' // mozda 'intval' nije potreban
 		)
+	),
+	
+	'kontakt' => array(
+		array(
+			'field' => 'email',
+			'label' => 'E-mail',
+			'rules' => 'required|valid_email'
+		),
+		array(
+			'field' => 'licno',
+			'label' => 'Licni podaci',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'poruka',
+			'label' => 'Poruka',
+			'rules' => 'required'
+		)
 	)
 );

@@ -1,7 +1,19 @@
-<input name="formtext1" type="text" style="position:absolute;width:367px;left:476px;top:572px;z-index:21">
-<input name="formtext2" type="text" style="position:absolute;width:367px;left:476px;top:621px;z-index:22">
-<input name="formtext3" type="text" style="position:absolute;width:367px;left:476px;top:672px;z-index:23">
-<form action="Kontakt poslato.html"><input name="formbutton1" type="submit" value="Posalji" style="position:absolute;left:516px;top:922px;z-index:24"></form>
+<form action="<?php echo site_url('kontakt'); ?>" method="POST">
+<input name="email" type="text" style="position:absolute;width:367px;left:476px;top:572px;z-index:21"<?php
+	if (!empty($greske)) echo " value=\"$f_email\""; ?>>
+<input name="licno" type="text" style="position:absolute;width:367px;left:476px;top:621px;z-index:22"<?php
+	if (!empty($greske)) echo " value=\"$f_licno\""; ?>>
+<input name="naslov" type="text" style="position:absolute;width:367px;left:476px;top:672px;z-index:23"<?php
+	if (!empty($f_naslov)) echo " value=\"$f_naslov\""; ?>>
+<input name="submit" type="submit" value="Posalji" style="position:absolute;left:516px;top:922px;z-index:24">
+<textarea name="poruka" style="position:absolute;left:476px;top:723px;width:366px;height:172px;z-index:30"><?php
+	if (!empty($greske)) echo $f_poruka; ?></textarea>
+<?php
+	if (!empty($greske))
+		echo '<script type="text/javascript">alert("'.addcslashes($greske, "\0..\37").'")</script>';
+?>
+</form>
+
 <div id="text1" style="position:absolute; overflow:hidden; left:389px; top:446px; width:351px; height:54px; z-index:25">
 <div class="wpmd">
 <div align=center><font color="#743F30" face="Narkisim" class="ws36"><B>Kontakt</B></font></div>
@@ -26,5 +38,3 @@
 <div class="wpmd">
 <div align=center><font color="#743F30" face="Narkisim" class="ws22"><B>E-mail:</B></font></div>
 </div></div>
-
-<textarea name="textarea1" style="position:absolute;left:476px;top:723px;width:366px;height:172px;z-index:30"></textarea>
