@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Untitled</title>
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="generator" content="Web Page Maker">
 <style type="text/css">
 @font-face {

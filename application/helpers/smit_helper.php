@@ -78,13 +78,14 @@ if (!function_exists('ispravan_datum')) {
 		// zato smo rucno zadali format datuma
 		
 		// TODO iz nekog razloga $d['bilosta'] nece da radi!
-		if (($d['warning_count'] > 0) || ($d['error_count'] > 0))
+		if (($d['warning_count'] > 0) || ($d['error_count'] > 0)) {
 			return FALSE;
+		}
 		
 		if ($d['is_localtime'])
 			$timestamp = mktime(0, 0, 0, $d['month'], $d['day'], $d['year']);
 		else
 			$timestamp = gmmktime(0, 0, 0, $d['month'], $d['day'], $d['year']);
-		return $timestamp; // return TRUE;
+		return ''.$timestamp; // return TRUE;
 	}
 }

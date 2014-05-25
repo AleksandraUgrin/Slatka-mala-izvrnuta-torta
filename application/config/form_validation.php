@@ -130,7 +130,7 @@ $config = array(
 		array(
 			'field' => 'datum',
 			'label' => 'Datum isporuke',
-			'rules' => 'required|ispravan_datum|intval' // mozda 'intval' nije potreban
+			'rules' => 'required|callback_ispravan_datum|intval' // mozda 'intval' nije potreban
 		)
 	)
 );

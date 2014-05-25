@@ -15,42 +15,82 @@ class Torte extends CI_Controller {
 	
 	public function rodjendanske()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(1);
+		$naslov = "Rodjendanske torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 1,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function decije()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(2);
+		$naslov = "Dečije torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 2,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function svadbene()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(3);
+		$naslov = "Svadbene torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 3,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function novogodisnje()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(4);
+		$naslov = "Novogodišnje torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 4,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function slavske()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(5);
+		$naslov = "Slavske torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 5,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function posne()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(6);
+		$naslov = "Posne torte";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 6,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function kolaci()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(7);
+		$naslov = "Kolači";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 7,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function ostalo()
 	{
-		$this->smit->stranica('rodjendanske');
+		$torte = $this->torta->listajKat(8);
+		$naslov = "Ostalo iz naše ponude";
+		$this->smit->stranica('rodjendanske', array(
+			'kat' => 8,
+			'katnaziv' => $naslov,
+			'torte' => $torte));
 	}
 	
 	public function t($id)
@@ -60,7 +100,11 @@ class Torte extends CI_Controller {
 		if (intval($id) <= 0)
 			redirect('galerija');
 		
-		$this->smit->stranica('sesir_torta');
+		$torta = $this->torta->sveOTorti($id);
+		if ($torta == FALSE)
+			redirect('galerija'); // nema torte u bazi
+		
+		$this->smit->stranica('sesir_torta', array('torta' => $torta));
 	}
 	
 	public function napravi() {
@@ -132,5 +176,12 @@ class Torte extends CI_Controller {
 			$this->smit->stranica('porucivanje', $conf);
 		} else
 			redirect('galerija');
+	}
+	
+	
+	// CALLBACK FUNKCIJA. Privremeno resenje za CodeIgniter bug?
+	// (izgleda da se ignorise rezultat globalne f-je)
+	function ispravan_datum($str) {
+		return ispravan_datum($str);
 	}
 }

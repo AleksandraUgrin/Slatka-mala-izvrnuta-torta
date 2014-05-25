@@ -91,4 +91,46 @@ class MTorta extends CI_Model {
 		
 		return $ins_id;
 	}
+	
+	function listajKat($kat) {
+		if (($kat < 1) || ($kat > 8))
+			return false; // 8 kategorija imamo!
+		
+		$query = $this->db->select('torta.IDTorta, Naziv, Slika')->from('torta')
+			->join('kategorijatorte', 'kategorijatorte.IDTorta = torta.IDTorta')
+			->where('Kategorija', $kat)->get();
+		
+		if ($query->num_rows() > 0) {
+			$torte = array();
+			$rez = $query->result();
+			foreach($rez as $row) {
+				$torte[] = array(
+					'id' => $row->IDTorta,
+					'naziv' => $row->Naziv,
+					'img' => $row->Slika
+				);
+			}
+			return $torte;
+		}
+		else
+			return array(); // UPS!
+	}
+	
+	function sveOTorti($id) {
+		$query = $this->db->where('IDTorta', $id)->where('Narucena', 0)->get('torta');
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return array(
+				'id' => $row->IDTorta,
+				'naziv' => $row->Naziv,
+				'cena' => $row->Cena,
+				'tezina' => $row->Tezina,
+				'oblik' => $row->PosebanOblik,
+				'tekst' => $row->Recept,
+				'img' => $row->Slika
+			);
+		}
+		else
+			return false;
+	}
 }
