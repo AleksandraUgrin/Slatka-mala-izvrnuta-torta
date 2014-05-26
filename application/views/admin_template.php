@@ -31,6 +31,9 @@
 		text-align: right;
 		font-size: 16px;
 	}
+	td.tekstporuke {
+		padding-bottom: 10px;
+	}
 </style>
 </head>
 

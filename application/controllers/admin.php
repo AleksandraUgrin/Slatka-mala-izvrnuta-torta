@@ -173,8 +173,29 @@ class Admin extends CI_Controller {
 			$this->smit->admin_stranica('unostorte');
 	}
 	
-	public function poruke() {
+	public function poruke($str = 1) {
 		if (!$this->_logged_in())
 			redirect('admin/login');
+		
+		$query = $this->db->select('IDMejl, Email, LicniPodaci, Naslov, Poruka, UNIX_TIMESTAMP(Datum) AS Datum')
+			->order_by('Datum', 'desc')->get('mejl'); // ->limit(...)
+		$poruke = array();
+		if ($query->num_rows() == 0) {
+			$this->smit->admin_stranica('poruke', array('poruke' => array()));
+			return;
+		}
+		// $query->first_row(), $query->next_row()
+		foreach ($query->result() as $row) {
+			$poruke[] = array(
+				'id' => $row->IDMejl,
+				'email' => $row->Email,
+				'licnipod' => $row->LicniPodaci,
+				'naslov' => $row->Naslov,
+				'datum' => $row->Datum,
+				'tekst' => $row->Poruka
+			);
+		}
+		
+		$this->smit->admin_stranica('poruke', array('poruke' => $poruke));
 	}
 }
