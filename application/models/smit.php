@@ -13,4 +13,9 @@ class SMIT extends CI_Model {
 		$this->load->view('template_end');
 	}
     
+	function admin_stranica($st, $conf = array()) {
+		$this->load->view('admin_template', $conf);
+		$this->load->view("admin/$st", $conf);
+		$this->load->view('admin_template_footer');
+	}
 }
