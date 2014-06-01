@@ -8,7 +8,7 @@ class MTorta extends CI_Model {
 		//session_start();
     }*/
 	
-	function unosNove($narucena, $naz = '', $c, $v, $kv, $kr, $sl, $k, $obl, $tez, $sl = null, $rec = null, $kat = array()) {
+	function unosNove($narucena, $naz = '', $c, $v, $kv, $kr, $sl, $k, $obl, $tez, $img = null, $rec = null, $kat = array()) {
 		$torta = array(
 		  'Naziv' => $naz,
 		  'Cena' => $c,
@@ -19,7 +19,7 @@ class MTorta extends CI_Model {
 		  'Slagovi' => $sl,
 		  'KeksKore' => $k,
 		  'PosebanOblik' => $obl,
-		  'Slika' => $sl,
+		  'Slika' => $img,
 		  'Recept' => $rec
 		);
 		if ($narucena)
@@ -57,8 +57,8 @@ class MTorta extends CI_Model {
 		return $this->unosNove(true, '', $c, $v, $kv, $kr, $sl, $k, $obl, $tez, null, null);
 	}
 	
-	function novaTorta($n, $c, $t, $v, $kv, $kr, $sl, $k, $obl, $sl, $rec, $kat) {
-		return $this->unosNove(false, $n, $c, $v, $kv, $kr, $sl, $k, $obl, $t, $sl, $rec, $kat);
+	function novaTorta($n, $c, $t, $v, $kv, $kr, $sl, $k, $obl, $img, $rec, $kat) {
+		return $this->unosNove(false, $n, $c, $v, $kv, $kr, $sl, $k, $obl, $t, $img, $rec, $kat);
 	}
 	
 	function porudzbina($id, $login = 0, $ime, $adr, $dat, $kol, $np) {
